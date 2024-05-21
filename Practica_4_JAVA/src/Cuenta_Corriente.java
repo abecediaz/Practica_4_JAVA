@@ -14,15 +14,16 @@ public class Cuenta_Corriente extends Cuenta {
 
     @Override
     public double consignar(float cantidad) {
-        if (sobregiro != 0) {
+        if (sobregiro < 0) {
             cantidad += sobregiro;
+
         }
         return super.consignar(cantidad);
     }
 
     @Override
     public double extracto_mensual() {
-        return super.extracto_mensual();
+        return comision_mensual = super.extracto_mensual();
     }
 
     public void imprimir() {

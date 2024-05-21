@@ -30,7 +30,7 @@ public class Cuenta_Ahorros extends Cuenta{
         if (numero_retiros > 4) {
             comision_mensual = numero_retiros * 1000;
             if (activa) {
-                return super.extracto_mensual();
+                return comision_mensual += super.extracto_mensual();
             }
             else {
                 System.out.println("La cuenta se encuentra inactiva.");
@@ -38,7 +38,7 @@ public class Cuenta_Ahorros extends Cuenta{
             }
         }
         else {
-            return super.extracto_mensual();
+            return comision_mensual = super.extracto_mensual();
         }
     }
 

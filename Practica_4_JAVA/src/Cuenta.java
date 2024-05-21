@@ -8,6 +8,7 @@ public class Cuenta {
 
     /*MÉTODOS*/
     public double consignar(float cantidad) {
+        numero_consignaciones++;
         return (saldo += cantidad);
     }
 
