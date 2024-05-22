@@ -1,45 +1,34 @@
 public class Cuenta_Ahorros extends Cuenta{
     /*ATRIBUTOS*/
-    protected boolean activa = saldo > 10000;
+    protected boolean activa;
 
     /*MÉTODOS*/
     @Override
-    public double consignar(float cantidad) {
+    public void consignar(float cantidad) {
         if (activa) {
-            return super.consignar(cantidad);
+            super.consignar(cantidad);
         }
         else {
             System.out.println("La cuenta se encuentra inactiva.");
-            return saldo;
         }
     }
 
     @Override
-    public double retirar(float cantidad) {
+    public void retirar(float cantidad) {
         if (activa) {
-            return super.retirar(cantidad);
+            super.retirar(cantidad);
         }
         else {
             System.out.println("La cuenta se encuentra inactiva.");
-            return saldo;
         }
     }
 
     @Override
-    public double extracto_mensual() {
+    public void extracto_mensual() {
         if (numero_retiros > 4) {
-            comision_mensual = numero_retiros * 1000;
-            if (activa) {
-                return comision_mensual += super.extracto_mensual();
-            }
-            else {
-                System.out.println("La cuenta se encuentra inactiva.");
-                return saldo;
-            }
+            comision_mensual += (numero_retiros - 4) * 1000;
         }
-        else {
-            return comision_mensual = super.extracto_mensual();
-        }
+        super.extracto_mensual();
     }
 
     public void imprimir() {
@@ -63,6 +52,7 @@ public class Cuenta_Ahorros extends Cuenta{
     /*CONSTRUCTOR*/
     public Cuenta_Ahorros(float saldo, float tasa_anual) {
         super(saldo, tasa_anual);
+        this.activa = saldo > 10000;
     }
 
     /*SETTERS*/

@@ -10,12 +10,13 @@ public class Main {
                             3) Depositar dinero.
                             4) Retirar dinero.
                             5) Información de la cuenta.
-                            6) Salir.
+                            6) Extracto mensual.
+                            7) Salir.
                             """);
     }
 
     public static int Validar_Menu(Scanner input, int menu){
-        while(menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6) {
+        while(menu < 1 || menu > 7) {
             System.out.print("El término ingresado no es válido. Por favor, inténtelo nuevamente: ");
             menu = input.nextInt();
         }
@@ -118,7 +119,16 @@ public class Main {
                         Mostrar_Informacion_Cuenta(cuenta);
                     }
                     break;
-                case 6: /*SALIR*/
+                case 6: /*EXTRACTO MENSUAL*/
+                    if (cuenta == null) {
+                        Imprimir_Error();
+                    }
+                    else {
+                        cuenta.extracto_mensual();
+                        System.out.println("Extracto mensual procesado correctamente.");
+                    }
+                    break;
+                case 7: /*SALIR*/
                     continuar++;
                     break;
             }

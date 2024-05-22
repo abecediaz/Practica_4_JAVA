@@ -7,28 +7,28 @@ public class Cuenta {
     protected double comision_mensual = 0;
 
     /*MÉTODOS*/
-    public double consignar(float cantidad) {
+    public void consignar(float cantidad) {
+        saldo += cantidad;
         numero_consignaciones++;
-        return (saldo += cantidad);
     }
 
-    public double retirar(float cantidad) {
+    public void retirar(float cantidad) {
         if (saldo - cantidad < 0) {
             System.out.println("La cantidad ingresada supera el saldo en cuenta.");
-            return saldo;
         }
         else {
+            saldo -= cantidad;
             numero_retiros++;
-            return (saldo -= cantidad);
         }
     }
 
-    public double calcular_interes() {
-        return (saldo *= (tasa_anual/12)/100);
+    public void calcular_interes() {
+        saldo += saldo * ((tasa_anual/12)/100);
     }
 
-    public double extracto_mensual() {
-        return (saldo = calcular_interes() - comision_mensual);
+    public void extracto_mensual() {
+        calcular_interes();
+        saldo -= comision_mensual;
     }
 
     @Override

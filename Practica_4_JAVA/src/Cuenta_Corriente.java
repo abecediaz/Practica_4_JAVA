@@ -4,26 +4,37 @@ public class Cuenta_Corriente extends Cuenta {
 
     /*MÉTODOS*/
     @Override
-    public double retirar(float cantidad) {
-        if (saldo - cantidad < 0) {
-            sobregiro += (float) (saldo - cantidad);
+    public void retirar(float cantidad) {
+        if (saldo >= cantidad) {
+            saldo -= cantidad;
+        }
+        else {
+            sobregiro += (float) (cantidad - saldo);
+            saldo = 0;
         }
         numero_retiros++;
-        return (saldo -= cantidad);
     }
 
     @Override
-    public double consignar(float cantidad) {
-        if (sobregiro < 0) {
-            cantidad += sobregiro;
-
+    public void consignar(float cantidad) {
+        if (sobregiro > 0) {
+            if (cantidad >= sobregiro) {
+                cantidad -= sobregiro;
+                sobregiro = 0;
+            } else {
+                sobregiro -= cantidad;
+                cantidad = 0;
+            }
         }
-        return super.consignar(cantidad);
+        super.consignar(cantidad);
     }
 
     @Override
-    public double extracto_mensual() {
-        return comision_mensual = super.extracto_mensual();
+    public void extracto_mensual() {
+        super.extracto_mensual();
+        if (sobregiro > 0) {
+            saldo -= sobregiro;
+        }
     }
 
     public void imprimir() {
